@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/AutoMapperAttributes/" />
+  <Folder Name="/AutoMapperAttributes/samples/">
+    <Project Path="AutoMapperAttributes/samples/AutoMapperAttributes.Sample/AutoMapperAttributes.Sample.csproj" />
+  </Folder>
+  <Folder Name="/AutoMapperAttributes/src/">
+    <Project Path="AutoMapperAttributes/src/AutoMapperAttributes/AutoMapperAttributes.csproj" />
+  </Folder>
+</Solution>
