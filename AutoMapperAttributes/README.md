@@ -77,6 +77,16 @@ services.AddAutoMapperAttributes(typeof(User).Assembly, typeof(SomeOtherModel).A
 services.AddAutoMapperAttributes([typeof(User), typeof(SomeOtherModel)]);
 ```
 
+Repeated calls are merged: independent modules can each register their own assembly, and all mappings end up in a single `IMapper`.
+
+By default the mapping configuration is validated (`AssertConfigurationIsValid`) when the `IMapper` is created, so misconfigured maps fail immediately. If some destination members are intentionally unmapped, opt out:
+
+```csharp
+services.AddAutoMapperAttributes(
+    options => options.ValidateConfiguration = false,
+    typeof(User).Assembly);
+```
+
 **Without DI (manual setup):**
 
 ```csharp
@@ -135,6 +145,8 @@ AutoMapperAttributes/
 │   └── AutoMapperAttributes/          # Class library
 │       ├── MapsToAttribute.cs          # The [MapsTo] attribute
 │       ├── AttributeMappingProfile.cs  # AutoMapper Profile scanner
+│       ├── AutoMapperAttributesOptions.cs
+│       ├── MappingRegistration.cs      # Merges assemblies across registration calls
 │       └── ServiceCollectionExtensions.cs
 └── samples/
     └── AutoMapperAttributes.Sample/   # Console app demo
@@ -152,5 +164,5 @@ AutoMapperAttributes/
 
 ## Requirements
 
-- .NET 8+
-- AutoMapper 14+
+- .NET 8, 9, or 10
+- AutoMapper 16 (note: AutoMapper 15+ is commercially licensed for larger organizations — see the AutoMapper licensing terms)
